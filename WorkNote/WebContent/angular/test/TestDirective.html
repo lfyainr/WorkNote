@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="../angular.min.js"></script>
+</head>
+
+<body>
+	<div ng-app="app" new-directive>
+	
+	</div>
+</body>
+<script>
+	var app = angular.module("app", []);
+	app.directive("newDirective", function() {
+		return {
+			template : "我在指令构造器中创建!"
+		};
+	});
+	
+</script>
+</html>

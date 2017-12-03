@@ -1,0 +1,37 @@
+<configuration>
+	<property>
+		<!-- hbase.master是指定运行HMaster的服务器及端口号 -->
+		<name>hbase.master</name>
+		<value>master:6000</value>
+	</property>
+	<property>
+		<!-- hbase.master.maxclockskew是用来防止HBase节点之间时间不一致造成regionserver启动失败，默认值是30000 -->
+		<name>hbase.master.maxclockskew</name>
+		<value>180000</value>
+	</property>
+	<property>
+		<!-- hbase.rootdir指定HBase的存储目录 -->
+		<name>hbase.rootdir</name>
+		<value>hdfs://master:9000/hbase</value>
+	</property>
+	<property>
+		<!-- hbase.cluster.distributed设置集群处于分布式模式 -->
+		<name>hbase.cluster.distributed</name>
+		<value>true</value>
+	</property>
+	<property>
+		<!-- hbase.zookeeper.quorum设置Zookeeper节点的主机名，它的值个数必须是奇数 -->
+		<name>hbase.zookeeper.quorum</name>
+		<value>serv01</value>
+	</property>
+	<property>
+		<!-- hbase.zookeeper.property.dataDir设置Zookeeper的目录，默认为/tmp -->
+		<name>hbase.zookeeper.property.dataDir</name>
+		<value>/home/${user.name}/tmp/zookeeper</value>
+	</property>
+	<property>
+		<!-- dfs.replication设置数据备份数，集群节点小于3时需要修改，本次试验是一个节点，所以修改为1 -->
+		<name>dfs.replication</name>
+		<value>1</value>
+	</property>
+</configuration>

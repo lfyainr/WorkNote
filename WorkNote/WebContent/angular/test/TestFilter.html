@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="../angular.min.js"></script>
+</head>
+
+<body>
+	<div ng-app="app" ng-controller="myCtrl">
+		<input ng-model='text' type='text'>
+
+		<ul>
+			<li ng-repeat="x in names | filter:text | orderBy:'name' ">{{
+				(x.y | uppercase) + " " + x.z}}</li>
+		</ul>
+		<p>{{ msg | filterTest }}</p>
+		<ul>
+			<li ng-repeat="mm in counts">{{ mm | filterPlusServ }}</li>
+		</ul>
+	</div>
+	<script>
+		var app = angular.module("app", []);
+
+		app.controller("myCtrl", function($scope, myServ) {
+			$scope.names = [ {
+				"y" : "a",
+				"z" : "b"
+			}, {
+				"y" : "a1",
+				"z" : "b1"
+			}, {
+				"y" : "fs",
+				"z" : "fd"
+			} ];
+			$scope.counts = [ 11, 43, 234,'as' ]
+			$scope.msg = "asd";
+		})
+
+		//自定义 过滤器
+		app.filter("filterTest", function() {
+			return function(text) {
+				return text + " aaa1";
+			}
+		});
+
+		//自定义  过滤器+服务
+		app.service("myServ", function() {
+			this.myFunc = function(xxx) {
+				var yyy = "yyy";
+				return xxx.toString(8) + " " + yyy;
+			}
+		});
+		app.filter("filterPlusServ", [ 'myServ', function(myServ) {
+			return function(x) {
+				return myServ.myFunc(x);
+			}
+		} ]);
+	</script>
+
+</body>
+</html>

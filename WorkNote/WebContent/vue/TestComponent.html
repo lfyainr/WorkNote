@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+	<script src="vue.min.js"></script>
+</head>
+<body>
+	
+	<div id='app'>
+		<p>Hello,{{msg}}!!</p>
+		<menu-item :item="item" v-for="item in menuList"></menu-item>
+	</div>
+	
+</body>
+<script>
+	var menu-item = Vue.extend({
+		name: 'menus',
+		props:{item:{}},
+		template:[
+		          '<p>11</p>'
+		].join('')
+	});
+
+	// 注册组件，传入一个扩展过的构造器
+	// Vue.component('my-component', Vue.extend({ /* ... */ }))
+	Vue.component('menu-item',menu-item);
+	
+	new Vue({
+		el:'#app',
+		data:{
+			msg:"Vue.js",
+			menuList:{
+				"1":"1",
+				"2":"2"
+			}
+		}
+	});
+	
+</script>
+
+</html>

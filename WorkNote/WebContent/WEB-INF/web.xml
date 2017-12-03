@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	
+	<!-- 测试 servlet初始化参数 -->
+	<context-param>
+		<param-name>test</param-name>
+		<param-value>test_value</param-value>
+	</context-param>
+	
+	<!-- 测试 servlet初始化监听 -->
+	<listener>
+		<listener-class>context.ContextListener</listener-class>
+	</listener>
+	
+	<!-- 启动执行 -->
+	<servlet>
+		<servlet-name>SystemStrat</servlet-name>
+		<servlet-class>com.SystemStrat</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- Define the pushlet servlet -->
+	<!-- <servlet>
+		<servlet-name>pushlet</servlet-name>
+		<servlet-class>nl.justobjects.pushlet.servlet.Pushlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	Define the Servlet Mappings.
+	The pushlet
+	<servlet-mapping>
+		<servlet-name>pushlet</servlet-name>
+		<url-pattern>/pushlet.srv</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>ChatServlet</display-name>
+		<servlet-name>ChatServlet</servlet-name>
+		<servlet-class>pushlet.ChatServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChatServlet</servlet-name>
+		<url-pattern>/ChatServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>UploadServlet</display-name>
+		<servlet-name>UploadServlet</servlet-name>
+		<servlet-class>html5.upload.UploadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UploadServlet</servlet-name>
+		<url-pattern>/upload.action</url-pattern>
+	</servlet-mapping> -->
+
+	<!-- 使用struts2，需要加入过滤器 -->
+	<filter>
+		<description>
+			<!-- 注意：2.3和2.5版本的 struts，过滤器地址不一样 -->
+		</description>
+        <filter-name>struts2</filter-name>
+        <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+        <!-- 已经不使用了的filter <filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class> -->
+	</filter>
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+</web-app>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="../angular.min.js"></script>
+</head>
+
+<body>
+	<div ng-app="app" ng-controller="myCtrl">
+		<p>URL:{{url}}</p>
+		<p>{{resData}}</p>
+		<p>{{timeOutData}}</p>
+		<p>{{intervalData}}</p>
+		<p>{{myServData}}</p>
+	</div>
+</body>
+<script>
+	var app = angular.module("app", []);
+	app.controller("myCtrl", function($scope,$location,$http,$timeout,$interval,myServ) {
+		//注意 $location 服务是作为一个参数传递到 controller 中。如果要使用它，需要在 controller 中定义。
+		$scope.url = $location.absUrl();
+	    $http.get("TestService.html").then(function success(res){
+	    	//success名字可变(可省略)   res名字可变
+	    	$scope.resData = res.data;
+	    },function errors(res){
+	    	//errors名字可变(可省略)  error是关键字，不能使用  res名字可变
+	    });
+	    $timeout(function(){
+	    	 $scope.timeOutData = "HHHHH";
+	    },2000 );
+	    $interval(function(){
+	    	$scope.intervalData = new Date().toLocaleTimeString();
+	    },1000 );
+	    
+	    
+	    $scope.myServData = myServ.myFunc(255);
+	});
+	
+	//自定义 服务
+	app.service("myServ",function(){
+		this.myFunc = function(x){
+			return x.toString(16);
+		}
+	});
+	
+</script>
+</html>

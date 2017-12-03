@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>HTML5上传</title>
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+	var host = "http://" + window.location.hostname + ":"
+			+ window.location.port;
+	var xhr;
+	function onfile(file) {
+		var fd = new FormData();
+		var excel = document.getElementById('fileid').files[0];
+		
+		//正则过滤 xls和xlsx
+		var reg = /^.*\.(?:csv|xls|xlsx)$/i;//文件名可以带空格
+        if (!reg.test(excel.name)) {//校验不通过
+            alert("请上传excel格式的文件!");
+            return;
+        }
+		
+		fd.append("fileToUpload", excel);
+		xhr = new XMLHttpRequest();
+		xhr.open("POST", host + "/upload.action");
+		//xhr.setRequestHeader("Content-Type","charset=UTF-8");
+		xhr.send(fd);
+		xhr.onreadystatechange = processResponse;
+	}
+	function processResponse() {
+		if (xhr.readyState == 4) {
+			alert("上传成功。");
+			/* 
+			debugger;
+			if (xhr.status == 200) {
+				var infor = xhr.responseText;
+				alert("服务器端的响应 = " + infor);
+			} 
+			*/
+		}
+	}
+</script>
+</head>
+<body>
+	<div class="container">
+		<div class="contr">
+			<h2>请选择文件，并点击上传按钮。</h2>
+		</div>
+		<div class="upload_form_cont">
+			<input id="fileid" type="file" accept="video/*;capture=camera">
+			<input id="btn" type="button" value="提交" onclick='onfile(this)'>
+		</div>
+	</div>
+</body>
+</html>

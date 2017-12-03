@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="../angular.min.js"></script>
+</head>
+<style>
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd)	{
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+</style>
+<body>
+	<div ng-app="app" ng-controller="myCtrl">
+		<table>
+			<tr  ng-repeat="x in names">
+				<td> {{$index + 1  }}</td>
+				
+				<td>
+					{{x.Name}}
+				</td>
+				<td>
+					{{x.City}}
+				</td>
+			</tr>
+		</table>
+		
+		<p ng-if="true">1=1</p>
+		<p ng-if="false">1=2</p>
+		
+		<!-- <p>{{names}}</p> -->
+	</div>
+	<script>
+		var app = angular.module("app",[]).controller('myCtrl',function($scope,$http){
+			/* $http.get("http://www.runoob.com/try/angularjs/data/Customers_JSON.php").then(function (result) {
+		        $scope.names = result.data.records;
+		    }); */
+			$scope.names = [{"Name":1,"City":11},{"Name":2,"City":22},{"Name":3,"City":33}];
+		});
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="../angular.min.js"></script>
+</head>
+
+<body>
+	<div ng-app="appMain" ng-controller='myCtrl'>
+		<input type='text' ng-model='number'> <br />
+		<button ng-click='sq()'>X2</button>
+		<br />
+		<p>{{result}}</p>
+
+	</div>
+</body>
+
+<script>
+	var appMain = angular.module("appMain", []);
+	
+	appMain.config(function($provide){
+		$provide.provider('myPro',function(){
+			this.$get = function(){
+				var factory = {};
+				factory.multi = function(a,b){
+					return a * b;
+				}
+			  	return factory;
+			};
+		});
+	});
+	
+	appMain.value("inputNum",5);//设置默认数字
+	
+	appMain.controller('myCtrl',function($scope, myService, inputNum){
+		$scope.number = inputNum;
+		$scope.result = myService.square($scope.number);
+		
+		$scope.sq = function(){
+			$scope.result = myService.square($scope.number)
+		}
+	}); 
+	
+	appMain.factory('myFactory',function(){
+		var factory = {};
+		factory.multiply = function(a,b){
+			return a * b;
+		}
+		return factory;
+	});
+	
+	appMain.service('myService',function(myFactory){
+	
+		this.square = function(a){
+			return myFactory.multiply(a,a);
+		}
+		
+	});
+	
+	
+</script>
+</html>

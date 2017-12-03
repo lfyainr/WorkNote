@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="../angular.min.js"></script>
+</head>
+
+<body>
+	<div ng-app="app" ng-controller="myCtl">
+		Hello {{name}} !! <br /> <input ng-model="name" /><br />
+		Hello {{text1}} !! <br /> <input ng-model="test2" /><br /> 
+		<button ng-click="sayHello()">点我</button>
+	</div>
+	<div id='myTest1'>
+		Hello {{name}} !! <br /> <input ng-model="name" />
+	</div>
+</body>
+<script>
+	var app = angular.module("app", []);
+	app.controller("myCtl", function($scope) {
+		$scope.name = "World";
+		$scope.text1 = "World";
+		$scope.sayHello = function(){
+			$scope.text1 = $scope.test2;
+		}
+	});
+	
+	
+	
+	
+	angular.module("myTest1", []);
+	//angular.bootstrap(document.getElementById("app2"), ['yourApp']);
+	angular.bootstrap(document.getElementById("myTest1"), ['myTest1']);
+</script>
+</html>

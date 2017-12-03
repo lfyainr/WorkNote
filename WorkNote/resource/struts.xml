@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE struts PUBLIC  
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"  
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!--i18n.reload 和 devMode true 开发模式，false 是生产模式 -->
+	<constant name="struts.i18n.reload" value="false" />
+	<constant name="struts.devMode" value="false" />
+	<package name="default" extends="struts-default" namespace="/">
+
+	</package>
+
+	<include file="struts-default.xml" />
+	<include file="test_struts.xml" />
+	<include file="timer_struts.xml" />
+
+</struts> 

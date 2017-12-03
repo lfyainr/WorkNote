@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="../angular.min.js"></script>
+</head>
+
+<body>
+	<div ng-app="app" ng-controller="myCtrl">
+		<select ng-options='x for (x,y) in sites'   ng-model='selectName' >
+		</select>
+		<p>1、你选中的是{{selectName.dizhi}}</p>
+	
+		<select ng-options='y.qita for (x,y) in sites'   ng-model='selectName' >
+		</select>
+		<p>2、你选中的是{{selectName.qita}}</p>
+	
+	</div>
+	<script>
+		var app = angular.module("app",[]).controller('myCtrl',function($scope){
+			$scope.sites = {
+			    site01 : {dizhi:"Google",qita:"123"},
+			    site02 : {dizhi:"Runoob",qita:"234"},
+			    site03 : {dizhi:"Taobao",qita:"345"}
+			};
+		});
+	</script>
+
+</body>
+</html>
